@@ -1,0 +1,30 @@
+.input{
+    width: 100%;
+    min-height: 7vh;
+    font-size: 30px;
+    border-radius: 16px;
+
+    padding-left: 20px;
+}
+
+.label{
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 50px;
+
+    align-items: center;
+    border-radius: 16px;
+    background: #666633;
+    color: #CCCCCC;
+    min-height: 8vh;
+
+    font-size: 26px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
