@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import EventService from "../API/EventService";
 import cl from "./AddEventButton.module.css"
+import EventService from "../../../API/EventService";
 import {useDispatch, useSelector} from "react-redux";
+import {updateEvents} from "../../content/component/CustomCalendar";
 
-const AddEventButton = (props) => {
+const AddEventButton = ({isAdding, setAdding}) => {
     const [inputText, setInputText] = useState('')
 
     const dispatch = useDispatch()
-    const modalDate = useSelector(state => state.modalRed.date)
-    const date = useSelector(state => state.dateRed.date)
+    const date = useSelector(state => state.modalRed.modalWindowDate)
 
     useEffect(()=> {
-        if (!props.isAdding){
+        if (!isAdding){
             setInputText('')
         }
-    }, [props.isAdding])
+    }, [isAdding])
 
     function addButtonClick() {
-        props.setAdding(true)
+        setAdding(true)
     }
     function inputChanged(event){
         event.preventDefault()
@@ -25,19 +25,16 @@ const AddEventButton = (props) => {
     }
     function addEventKeyDown(event) {
         if (event.key === 'Enter') {
+            EventService.addEvent(date, inputText)
+                .then(r => updateEvents(date, dispatch))
+
             setInputText('')
-            props.setAdding(false)
-
-            EventService.addEvent(modalDate, event.target.value)
-                .then(() => {
-                    EventService.updateEvents(date, dispatch)
-                });
-
+            setAdding(false)
         }
     }
 
     return (
-        props.isAdding
+        isAdding
             ?
             (
                 <form style={{display:"flex"}}>
@@ -56,7 +53,7 @@ const AddEventButton = (props) => {
                 <div
                     onClick={addButtonClick}
                     className={cl.label}>
-                    +
+                    Добавить
                 </div>
             )
     );

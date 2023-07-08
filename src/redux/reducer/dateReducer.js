@@ -1,19 +1,31 @@
-import moment from "moment";
-import {CHANGE_DATE_MONTH, RESET_DATE} from "../actions";
-
 const defaultState = {
-    date: moment()
+    date: new Date()
 }
 
 export const dateReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case CHANGE_DATE_MONTH:
-            return {...state, date: state.date.clone().add(action.value, 'month')}
+        case SET_ACTIVE_DATE:
+            return {...state, date: action.value}
 
         case RESET_DATE:
-            return {...state, date: moment()}
+            return {...state, date: new Date()}
 
         default:
             return state
+    }
+}
+
+const SET_ACTIVE_DATE = "SET_ACTIVE_DATE"
+export const setActiveDate = (val) =>{
+    return {
+        type: SET_ACTIVE_DATE,
+        value: val
+    }
+}
+
+const RESET_DATE = "RESET_DATE"
+export const resetDate = () => {
+    return {
+        type: RESET_DATE
     }
 }

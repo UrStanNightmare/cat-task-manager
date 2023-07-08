@@ -1,0 +1,13 @@
+.image{
+    width: 3vh;
+    height: 3vh;
+    border-radius: 20px;
+}
+
+.connected{
+    background-color: limegreen;
+}
+
+.not_connected{
+    background-color: #f37b7b;
+}

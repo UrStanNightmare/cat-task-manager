@@ -1,0 +1,74 @@
+.darkBG {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.open{
+    animation-name: contentAppear;
+    animation-duration: 0.15s;
+    animation-timing-function: linear;
+}
+
+.closed{
+    animation-name: contentDisappear;
+    animation-duration: 0.15s;
+    animation-timing-function: linear;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal {
+    width: 90vw;
+    height: 90vh;
+    background-color: var(--main-color2);
+    /*color: white;*/
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    padding: 5px 5px 5px 5px;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+@keyframes contentAppear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0.6;
+    }
+}
+
+@keyframes contentDisappear {
+    0%{
+        opacity: 0.6;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes modalAppear {
+    0%{
+        left: 0;
+    }
+    100%{
+        left: 500px;
+    }
+}

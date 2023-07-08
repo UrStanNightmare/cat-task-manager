@@ -1,0 +1,10 @@
+.deleteButton{
+    width: 6vh;
+    height: 6vh;
+    border-radius: 5px;
+    background-color: var(--main-color3);
+}
+
+.deleteButton:hover{
+    background-color: var(--second-color1);
+}

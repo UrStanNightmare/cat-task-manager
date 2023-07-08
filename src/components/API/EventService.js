@@ -1,69 +1,78 @@
 import axios from "axios";
-import {formatDate} from "../dateUtils";
-import Dayz from "dayz";
-import moment from "moment";
-import {changeEventStatus, setEventsArray} from "../../redux/actions";
+import DateUtils from "../utils/dateUtils";
 
-const URL = 'http://localhost:8080/api/v1';
+const URL = 'https://catapi.urstannightmare.ru/api/v1';
 export default class EventService {
-
     static async addEvent(date, text) {
-        const dateString = date.toISOString().split('T')[0];
-
-        try {
-            const response = await axios.post(URL + '/task',
-                {
-                    date: dateString,
-                    description: text,
-                    isDone: false
-                });
-            return response.data
-        } catch (e) {
-            console.log(e)
-        }
-
-        return {}
+        const dateString = DateUtils.createShortDateString(date)
+        return await axios.post(URL + '/task',
+            {
+                date: dateString,
+                description: text,
+                isDone: false
+            }).then(r => true)
+            .catch((error) => {
+                console.warn('Event creation error!')
+                return false
+            });
     }
 
-    static async changeEventStatus(event) {
-        const eventId = event.attributes.id
-
-        const response = await axios.post(
-            URL + "/task/" + eventId + "/changeDoneState"
-        )
+    static async isServerAvailable() {
+        return await axios.get(URL + '/health')
+            .then(r => {
+                return true;
+            }).catch((error) => {
+                return false;
+            })
     }
 
-    static async updateEvents(date, dispatch) {
-        const dateString = formatDate(date);
+    static async getEventsFromServer(date) {
+        const dateString = DateUtils.createShortDateString(date);
 
-        const response = await axios.get(URL + "/tasks",
+        return await axios.get(URL + "/tasks",
             {
                 params: {
                     date: dateString
                 }
             }).then(r => {
-
-            const events = new Dayz.EventsCollection(
+            return (
                 r.data.tasks.map(v => {
-                        return {
-                            id: v.id,
-                            content: v.description,
-                            range: moment.range(new Date(v.date), new Date(v.date)),
-                            done: v.done
-                        }
+                    let date = new Date(Date.parse(v.date))
+                    const userTimezoneOffset = Math.abs(date.getTimezoneOffset() * 60000);
+                    date = new Date(date.getTime() - userTimezoneOffset);
+                    return {
+                        id: v.id,
+                        description: v.description,
+                        start: date,
+                        end: date,
+                        allDay: true,
+                        isDone: v.done
                     }
-                )
+                })
             )
-
-            dispatch(setEventsArray(events))
+        }).catch((error) => {
+            console.warn('Failed to get events from server!')
+            return []
         });
     }
 
-    static async removeEvent(event){
-        const eventId = event.attributes.id
+    static async changeEventStatus(id) {
+        return await axios.post(
+            URL + "/task/" + id + "/changeDoneState"
+        ).then(r => true)
+            .catch((error) => {
+                console.warn('Failed to change event status!')
+                return false;
+            })
+    }
 
-        const response = await axios.delete(
-            URL + "/task/" + eventId + "/delete"
-        )
+    static async deleteEvent(id) {
+        return await axios.delete(
+            URL + "/task/" + id + "/delete"
+        ).then(r => true)
+            .catch((error) => {
+                console.warn('Event deletion error')
+                return false
+            })
     }
 }

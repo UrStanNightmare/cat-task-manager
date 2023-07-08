@@ -1,0 +1,7 @@
+.header{
+    flex-grow: 1;
+    align-self: center;
+    color: var(--second-color5);
+    font-weight: bolder;
+    font-size: 42px;
+}

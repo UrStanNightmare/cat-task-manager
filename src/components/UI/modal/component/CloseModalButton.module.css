@@ -1,13 +1,4 @@
-.input{
-    width: 100%;
-    min-height: 7vh;
-    font-size: 30px;
-    border-radius: 16px;
-
-    padding-left: 20px;
-}
-
-.label{
+.closeButton{
     display: flex;
     justify-content: center;
     padding-left: 20px;
@@ -15,11 +6,11 @@
 
     align-items: center;
     border-radius: 16px;
-    background: #666633;
-    color: #CCCCCC;
+    background: var(--second-color2);
+    color: var(--second-color5);
     min-height: 8vh;
 
-    font-size: 26px;
+    font-size: 30px;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;

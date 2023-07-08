@@ -1,0 +1,11 @@
+.userFrame{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.userIcon{
+    width: 5vh;
+    height: 5vh;
+}
