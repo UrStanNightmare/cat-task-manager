@@ -1,66 +1,54 @@
 import React, {useEffect} from 'react';
+import Modal from "./components/UI/modal/Modal";
+import ContentFrame from "./components/UI/content/ContentFrame";
+import HeaderFrame from "./components/UI/header/HeaderFrame";
 import "./styles/styles.css"
-import DayInfoModal from "./components/DayInfoModal";
-import Calendar from "./components/Calendar";
 import {useDispatch, useSelector} from "react-redux";
-import {changeDateMonth, resetDate} from "./redux/actions";
-import {getMonthName} from "./components/dateUtils";
+import {setModalWindowVisible} from "./redux/reducer/modalReducer";
+import DayFrame from "./components/UI/modal/DayFrame";
 import EventService from "./components/API/EventService";
-
+import {setServerOnlineState} from "./redux/reducer/serverReducer";
 
 const App = () => {
     const dispatch = useDispatch()
-    const date = useSelector(state => state.dateRed.date)
-    const events = useSelector(state => state.evRed.events)
     const modalVisible = useSelector(state => state.modalRed.visible)
+    const changeModalVisibility = (val, resetFunc) => {
+        dispatch(setModalWindowVisible(val, resetFunc))
+    }
+
+    const INTERVAL_MS = 300000
+    const updateServerAvailabilityStatus = async () => {
+        const isAvailable = await EventService.isServerAvailable()
+        dispatch(setServerOnlineState(isAvailable))
+    }
+
+    const setIntervalImmadiateley = (func, interval) => {
+        func()
+        return setInterval(func, interval)
+    }
 
     useEffect(() => {
-        EventService.updateEvents(date, dispatch)
-    }, [date])
+        const interval = setIntervalImmadiateley(updateServerAvailabilityStatus, INTERVAL_MS)
 
-    function nextMonth() {
-        dispatch(changeDateMonth(1))
-    }
+        return () => clearInterval(interval)
+    }, [])
 
-    function prevMonth() {
-        dispatch(changeDateMonth(-1))
-    }
 
-    function resetMonth() {
-        dispatch(resetDate())
-    }
+    return (
+        <>
+            <div className="app">
+                <HeaderFrame/>
+                <ContentFrame/>
+            </div>
+            <Modal
+                visible={modalVisible}
+                changeVisibility={changeModalVisibility}
+            >
+                <DayFrame/>
+            </Modal>
+        </>
 
-    return (<div className="app">
-            <DayInfoModal/>
-            {!modalVisible
-                ?
-                (<div className="contentPanel">
-                    <h1>Calendar</h1>
-                    <div className="monthPanel">
-                        <button
-                            className="monthSwitchButton"
-                            onClick={prevMonth}
-                        >
-                            &lt;
-                        </button>
-                        <button
-                            className="monthResetButton"
-                            onClick={resetMonth}>
-                            {getMonthName(date.toDate().getMonth())}
-                        </button>
-                        <button
-                            className="monthSwitchButton"
-                            onClick={nextMonth}>
-                            &gt;
-                        </button>
-                    </div>
-                    <Calendar/>
-                </div>)
-                : (<div/>)
-            }
-        </div>
 
-    );
+    )
 };
-
 export default App;

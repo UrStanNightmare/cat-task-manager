@@ -1,0 +1,22 @@
+.eventsPanel{
+    flex-grow: 95;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.emptyPanel{
+    flex-grow: 95;
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 20px;
+    padding-right: 50px;
+
+    align-items: center;
+    border-radius: 16px;
+    color: #CCCCCC;
+    min-height: 8vh;
+
+    font-size: 30px;
+}

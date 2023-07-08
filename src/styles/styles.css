@@ -1,50 +1,15 @@
-#root{
-    /*margin-left: 1vw;*/
-    /*margin-right: 1vw;*/
-    /*margin-bottom: 1vh;*/
+@import "./theme.css";
+
+#root,#modal{
+    margin: 0 0 0 0;
 }
 
 .app {
-    height: 80vh;
     flex-grow: 1;
-}
-
-.highlight{
-    border: 5px solid rgb(242, 11, 11);
-    border-radius: 15px;
-    background-color: #4fce83;
-}
-
-.contentPanel {
+    margin: 1vh 1vw 1vh 1vw;
+    height: 100vh;
+    max-height: 100%;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    gap: 20px;
-    height: 80vh;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
-
-.monthPanel {
-    display: flex;
-    flex-grow: 1;
-    align-self: stretch;
-    justify-content: space-around;
-    column-gap: 5px;
-    /*gap: 20px;*/
-}
-
-.monthPanel > button {
-    text-align: center;
-    font-size: 24px;
-}
-
-.monthSwitchButton {
-    display: block;
-    flex-basis: 10%;
-
-}
-
-.monthResetButton {
-    display: block;
-    flex-basis: 15%;
+    justify-content: space-between;
 }

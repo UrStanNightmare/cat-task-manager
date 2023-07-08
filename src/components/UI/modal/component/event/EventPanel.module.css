@@ -1,0 +1,24 @@
+.panel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 50px;
+
+    align-items: center;
+    border-radius: 16px;
+    background: var(--main-color1);
+    color: var(--second-color5);
+    min-height: 8vh;
+
+    font-size: 30px;
+}
+
+.buttonPanel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    gap: 0.5vw;
+}

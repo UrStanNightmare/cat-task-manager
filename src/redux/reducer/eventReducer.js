@@ -1,10 +1,5 @@
-import Dayz from "dayz";
-import {ADD_VISIBLE_EVENT_TO_ARRAY, CHANGE_EVENT_STATUS, SET_EVENTS_ARRAY, SET_VISIBLE_EVENTS_ARRAY} from "../actions";
-
 const defaultState = {
-    events: new Dayz.EventsCollection([]),
-
-    visibleEvents: []
+    events: []
 }
 
 export const eventReducer = (state = defaultState, action) => {
@@ -15,12 +10,22 @@ export const eventReducer = (state = defaultState, action) => {
         case SET_VISIBLE_EVENTS_ARRAY:
             return {...state, visibleEvents: action.value}
 
-        case ADD_VISIBLE_EVENT_TO_ARRAY: {
-            const evs = state.visibleEvents.add(action.value)
-            return {...state, visibleEvents: evs}
-        }
-
         default:
             return state
+    }
+}
+
+const SET_EVENTS_ARRAY = "SET_EVENTS_ARRAY"
+export const setEventsArray = (val) => {
+    return {
+        type: SET_EVENTS_ARRAY,
+        value: val
+    }
+}
+const SET_VISIBLE_EVENTS_ARRAY = "SET_VISIBLE_EVENTS_ARRAY"
+export const setVisibleEventsArray = (val) => {
+    return {
+        type: SET_VISIBLE_EVENTS_ARRAY,
+        value: val
     }
 }

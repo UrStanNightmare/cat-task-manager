@@ -5,6 +5,7 @@ import {Provider} from 'react-redux'
 import {store} from "./redux";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+export const modalElement = document.getElementById('modal');
 
 root.render(
     <Provider store={store}>
