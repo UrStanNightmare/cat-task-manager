@@ -52,6 +52,8 @@ const CustomCalendar = () => {
         // }
         dispatch(setModalWindowDate(slotInfo.start))
         dispatch(setModalWindowVisible(true, null))
+
+
     }
 
     const onSelectEvent = (event) => {
@@ -87,7 +89,7 @@ const CustomCalendar = () => {
             onSelectEvent={onSelectEvent}
             popup={false}
             showAllEvents={true}
-            longPressThreshold={20}
+            longPressThreshold={200}
         />
     );
 };

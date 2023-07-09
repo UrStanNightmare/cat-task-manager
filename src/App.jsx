@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import Modal from "./components/UI/modal/Modal";
 import ContentFrame from "./components/UI/content/ContentFrame";
 import HeaderFrame from "./components/UI/header/HeaderFrame";
 import "./styles/styles.css"
@@ -8,6 +7,7 @@ import {setModalWindowVisible} from "./redux/reducer/modalReducer";
 import DayFrame from "./components/UI/modal/DayFrame";
 import EventService from "./components/API/EventService";
 import {setServerOnlineState} from "./redux/reducer/serverReducer";
+import Modal from "./components/UI/modal/Modal";
 
 const App = () => {
     const dispatch = useDispatch()
@@ -33,16 +33,15 @@ const App = () => {
         return () => clearInterval(interval)
     }, [])
 
-
     return (
         <>
             <div className="app">
                 <HeaderFrame/>
                 <ContentFrame/>
             </div>
+
             <Modal
                 visible={modalVisible}
-                changeVisibility={changeModalVisibility}
             >
                 <DayFrame/>
             </Modal>

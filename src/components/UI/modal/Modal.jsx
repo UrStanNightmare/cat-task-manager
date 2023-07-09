@@ -1,41 +1,19 @@
-import React, {useState} from 'react';
-import {createPortal} from "react-dom";
-import {modalElement} from "../../../index";
+import React from 'react';
 import cl from './Modal.module.css'
+import {Portal} from "./Portal";
 
-const Modal = ({visible, changeVisibility, children}) => {
-
-    const [animation, setAnimation] = useState(cl.open)
-    const resetAnimation = () => {
-        setAnimation(cl.open)
-    }
-    const bgClick = async () => {
-
-        setAnimation(cl.closed)
-
-        await new Promise(r => setTimeout(r, 140))
-        changeVisibility(false, resetAnimation)
-
-    }
-
+const Modal = ({visible, children}) => {
     return (
-        createPortal(
-            visible && (
-                <>
-                    <div className={[cl.darkBG, animation].join(' ')}
-                         onClick={() => bgClick()}
-                    >
+        <Portal>
+            {visible && (
+                <div className={visible ? [cl.modal, cl.modal_active].join(" ") : cl.modal}>
+                    <div className={visible ? [cl.modal_content, cl.content_active].join(" ") : cl.content_active}
+                         onClick={event => event.stopPropagation()}>
+                        {children}
                     </div>
-                    <div className={[cl.centered, animation].join(' ')}>
-                        <div className={cl.modal}>
-                            {children}
-                        </div>
-                    </div>
-                </>
-            ),
-            modalElement
-        )
+                </div>
+            )}
+        </Portal>
     );
 };
-
 export default Modal;

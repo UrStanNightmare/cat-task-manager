@@ -1,74 +1,55 @@
-.darkBG {
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100vw;
-    max-width: 100%;
+.modal {
     height: 100vh;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
 }
 
-.open{
+.modal_active {
+    animation-name: modalAppear;
+    animation-duration: 0.10s;
+    animation-timing-function: linear;
+}
+
+.modal_content {
+    display: block;
+    flex-grow: 1;
+
+    margin: 2vh 1.5vw 2vh 1.5vw;
+    padding: 20px;
+    border-radius: 12px;
+
+    background-color: var(--main-color2);
+
+    overflow-y: auto;
+}
+
+.content_active{
     animation-name: contentAppear;
     animation-duration: 0.15s;
     animation-timing-function: linear;
 }
 
-.closed{
-    animation-name: contentDisappear;
-    animation-duration: 0.15s;
-    animation-timing-function: linear;
-}
-
-.centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.modal {
-    width: 90vw;
-    height: 90vh;
-    background-color: var(--main-color2);
-    /*color: white;*/
-    z-index: 10;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-    padding: 5px 5px 5px 5px;
-    overflow-y: auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
+@keyframes modalAppear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 @keyframes contentAppear {
     0%{
-        opacity: 0;
+        transform: scale(0.5);
     }
     100%{
-        opacity: 0.6;
-    }
-}
-
-@keyframes contentDisappear {
-    0%{
-        opacity: 0.6;
-    }
-    100%{
-        opacity: 0;
-    }
-}
-
-@keyframes modalAppear {
-    0%{
-        left: 0;
-    }
-    100%{
-        left: 500px;
+        transform: scale(1);
     }
 }
