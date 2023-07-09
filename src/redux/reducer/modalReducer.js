@@ -3,13 +3,22 @@ const defaultState = {
     modalWindowDate: undefined
 }
 
+let lastTimeOpened = undefined
+
 export const modalReducer = (state = defaultState, action) => {
     switch (action.type) {
         case SET_MODAL_WINDOW_VISIBLE:
         {
-            if(action.refreshAnimationFunc != null){
-                action.refreshAnimationFunc()
-            }
+            // const now = new Date().getTime()
+            //
+            // if (lastTimeOpened !== undefined && action.value === false){
+            //     if ((now - lastTimeOpened) / 1000 < 1){
+            //         return state
+            //     }
+            // }
+            //
+            // lastTimeOpened = now
+
             return {...state, visible: action.value}
         }
 

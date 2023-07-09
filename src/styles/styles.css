@@ -1,10 +1,51 @@
 @import "./theme.css";
+#root{
+    margin: 0 0 0 0;
+    height: 100vh;
+    max-height: 100%;
 
-#root,#modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#modal{
     margin: 0 0 0 0;
 }
 
+/*#root,#modal{*/
+/*    margin: 0 0 0 0;*/
+/*}*/
+
 .app {
+    flex-grow: 1;
+    margin: 1vh 1vw 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*.appBuffer {*/
+/*    flex-grow: 1;*/
+/*    margin: 1vh 1vw 1vh 1vw;*/
+/*    height: 100vh;*/
+/*    !*max-height: 100%;*!*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+.testDiv{
+    width: 100px;
+    height: 100px;
+    background-color: rgba(73, 246, 221, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.central{
     flex-grow: 1;
     margin: 1vh 1vw 1vh 1vw;
     height: 100vh;
@@ -12,4 +53,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: cyan;
 }

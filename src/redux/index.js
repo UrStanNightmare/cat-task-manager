@@ -1,5 +1,4 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import promiseMiddleware from 'redux-promise';
 import {eventReducer} from "./reducer/eventReducer";
 import {composeWithDevToolsDevelopmentOnly} from "@redux-devtools/extension";
 import {serverReducer} from "./reducer/serverReducer";
