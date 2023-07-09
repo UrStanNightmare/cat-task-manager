@@ -6,7 +6,8 @@ import {setModalWindowVisible} from "../../../../redux/reducer/modalReducer";
 const CloseModalButton = ({setAdding}) => {
     const dispatch = useDispatch()
 
-    const closeEvent = () => {
+    const closeEvent = (ev) => {
+        ev.stopPropagation()
         setAdding(false)
         dispatch(setModalWindowVisible(false))
     }
@@ -14,7 +15,7 @@ const CloseModalButton = ({setAdding}) => {
     return (
         <div
             onSelect={e => e.stopPropagation()}
-            onClick={closeEvent}
+            onMouseUp={closeEvent}
             className={cl.closeButton}>
             Закрыть
         </div>
