@@ -1,7 +1,11 @@
 import axios from "axios";
 import DateUtils from "../utils/dateUtils";
 
-const URL = 'https://catapi.urstannightmare.ru/api/v1';
+let URL = process.env.REACT_APP_API_URL;
+
+if (URL === undefined){
+    URL = 'http://localhost:8080'
+}
 export default class EventService {
     static async addEvent(date, text) {
         const dateString = DateUtils.createShortDateString(date)
