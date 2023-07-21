@@ -1,8 +1,30 @@
-# Getting Started with Create React App
+# Cat-task-manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+____
+Проект был инициализирован с использованием [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Небольшой клиент для взаимодействия с [Cat help server](https://github.com/UrStanNightmare/cathelpserver)
+Открывает календарь для просмотра, добавления, удаления событий.
+
+### Запуск
+Имеется docker файл для сборки образа и запуска контейнера. 
+
+При сборке образа стоит указать 
+```
+--build-arg REACT_APP_API_URL=https://path-to-api.com
+```
+для указания пути по которому клиент будет пытаться получить данные о событиях.
+
+Рекомендую после запуска закрыть клиент базовой авторизацией.
+
+### Планы
+* Добавление механизма авторизации
+* Добавления возможности использования несколькими пользователями
+* Изменение темы календаря на тёмную. В данный темная тема реализована только для всплывающего окна.
+
+____
+# Create React App документация:
+## Доступные скрипты
 
 In the project directory, you can run:
 
