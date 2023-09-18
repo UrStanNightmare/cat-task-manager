@@ -8,13 +8,12 @@ import DayFrame from "./components/UI/modal/DayFrame";
 import EventService from "./components/API/EventService";
 import {setServerOnlineState} from "./redux/reducer/serverReducer";
 import Modal from "./components/UI/modal/Modal";
+import {updateEvents} from "./components/UI/content/component/CustomCalendar";
 
 const App = () => {
     const dispatch = useDispatch()
     const modalVisible = useSelector(state => state.modalRed.visible)
-    const changeModalVisibility = (val, resetFunc) => {
-        dispatch(setModalWindowVisible(val, resetFunc))
-    }
+    const date = useSelector(state => state.dateRed.date)
 
     const INTERVAL_MS = 300000
     const updateServerAvailabilityStatus = async () => {
@@ -28,7 +27,16 @@ const App = () => {
     }
 
     useEffect(() => {
-        const interval = setIntervalImmadiateley(updateServerAvailabilityStatus, INTERVAL_MS)
+        let interval
+        EventService.tryToLogIn()
+            .then(() => {
+                interval = setIntervalImmadiateley(updateServerAvailabilityStatus, INTERVAL_MS)
+            })
+            .then(() => {
+                    updateEvents(date, dispatch)
+                }
+            )
+
 
         return () => clearInterval(interval)
     }, [])
